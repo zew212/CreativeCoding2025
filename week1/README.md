@@ -1,6 +1,6 @@
 # H1 Assignment 1
 
->  “As a result, instead of optimizing our machines for humanity—or even the benefit of some particular group—we are optimizing humans for machinery.” Douglas Rushkoff pg. 15
+> “As a result, instead of optimizing our machines for humanity—or even the benefit of some particular group—we are optimizing humans for machinery.” Douglas Rushkoff pg. 15
 
 *This quote stood out to me because it brakes down our past relationship with machinery and how even through this new technology, we still are conforming ourselves into the mold of the machine. He compares the usurption of labor by machines to the devaluing of human thought in this digital age. It strengthens a hierarchical system that leaves the majority of people in the hands of the few.* 
 
