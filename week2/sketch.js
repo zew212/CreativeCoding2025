@@ -16,8 +16,12 @@ function draw() {
   fill(250, 80, 10, 20);
   ellipse(250, 300, 200, 20);
   line(250, 90, 250, 290); // connecting the ellipses
+  
+  strokeWeight(1);
+  ellipse(200, 200, 100, 20) 
 
 };
 
 rect(100,80,100,10);
 
+angleMode
