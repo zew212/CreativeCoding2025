@@ -14,6 +14,10 @@ function setup() {
 }
 
 function draw() {
+
+
+console.log(mouseX + ", " + mouseY);
+
   background("rgba(154, 217, 244, .5)");
   // a gray scale color is denoted as a number 0-255
   // 0 is black, 255 is white
