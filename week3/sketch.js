@@ -10,7 +10,7 @@ let circlesize = 100;
 
 function setup() {
   createCanvas(500, 500);
-
+// to make the canvas the size of the window, use createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
@@ -118,7 +118,7 @@ fill("lightblue");
 // hex codes start with a # followed by 6 digits (0-9, A-F)
 // the first two digits are the red value, the next two are the green value, and the last two are the blue value
 
-//ellipse(mouseX, mouseY, 40, 40);
+ellipse(mouseX, mouseY, 40, 40);
 
 // mouseX and mouseY are the current coordinates of the mouse
 // the ellipse will follow the mouse
