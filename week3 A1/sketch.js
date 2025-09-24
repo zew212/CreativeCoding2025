@@ -59,13 +59,13 @@ fill("rgba(56, 14, 224, 0.5)");
 fill("rgba(87, 20, 94, 0.5)");
 beginShape();
 // vertex(x, y)
-vertex(180, 300);
+vertex(windowWidth/3, 300);
 // top left point
-vertex(200, 420);
+vertex(windowWidth/2.5, 420);
 // bottom left point
-vertex(250, 420);
+vertex(windowWidth/2, 420);
 // bottom right point
-vertex(290, 310);
+vertex(windowWidth/1.7, 310);
 // top point
 endShape();
 
