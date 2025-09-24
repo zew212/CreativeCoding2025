@@ -110,7 +110,7 @@ vertex(windowWidth/1.6, 480);
 endShape();
 
 fill("rgba(148, 165, 92, 1)");
-rect(windowWidth/6, windowWidth/1.39, 50, 50);
+rect(windowWidth/6, 365, 50, 50);
 // (x, y, width, height)
 // square in the bottom right corner
 // opposite of the first square
