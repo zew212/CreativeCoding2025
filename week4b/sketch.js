@@ -7,8 +7,11 @@ function draw() {
   background("lightblue")
 
   for(let y=50; y<height-50; y+=100){
+    // x<width means "as long as x is less than the width of the screen
+    // sets up loop
 
     for(let x=50; x<width-50; x+=100){
+      // vertical 
 
    
       push();
@@ -32,15 +35,6 @@ function draw() {
       circle(mouseX,mouseY,60-mouseY)
       // circle changes size based on X value
 
-
-
-
-
-
-  function draw() {
-
-  
-}
 
 
     }
