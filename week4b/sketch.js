@@ -24,24 +24,31 @@ function draw() {
       // circle(x,y,diameter)
       // makes the circles go farther away when the mouse moves to the right
 
+
       pop();
+
+    
+      fill('yellow')
+      circle(mouseX,mouseY,80-mouseX)
+      // circle changes size based on X value
 
 
       push();
 
       if(mouseIsPressed == true);
+      fill('pink');
       
 
 
 
       pop();
 
-function draw() {
 
-
+  function draw() {
 
   
 }
+
 
     }
 }
