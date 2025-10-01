@@ -25,6 +25,8 @@ function draw() {
     // everything within this push/pop is centered in the middle of the screen
     // with 0,0 as the center point
       let rotation = map (y,0,height-50,0,PI);
+      // map(value to map, min of value, max of value, min of output, max of output)
+      // map= a function that takes a value and converts it to a different range
       rotate(rotation);
       // everything within this push/pop is rotated based on the y position
 
@@ -43,5 +45,7 @@ function draw() {
     pop();
     }
   }
+
+  
 
 }
