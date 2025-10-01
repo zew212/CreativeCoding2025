@@ -9,9 +9,11 @@ function draw() {
   for(let y=50; y<height-50; y+=100){
     // x<width means "as long as x is less than the width of the screen
     // sets up loop
+    // let : defines the variable
+    // aligned so the top of the circle just barely touches the top
 
     for(let x=50; x<width-50; x+=100){
-      // vertical 
+      // loop
 
    
       push();
@@ -26,7 +28,7 @@ function draw() {
       circle(mouseX/8*random([windowWidth], [windowHeight]),0,100);
       // circle(x,y,diameter)
       // makes the circles go farther away when the mouse moves to the right
-
+      // learned through https://p5js.org/reference/p5/random/
 
       pop();
 
