@@ -27,21 +27,14 @@ function draw() {
 
       pop();
 
-    
-      fill('yellow')
-      circle(mouseX,mouseY,80-mouseX)
+
+      fill('gold')
+      circle(mouseX,mouseY,60-mouseY)
       // circle changes size based on X value
 
 
-      push();
-
-      if(mouseIsPressed == true);
-      fill('pink');
-      
 
 
-
-      pop();
 
 
   function draw() {
