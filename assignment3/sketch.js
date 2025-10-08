@@ -88,6 +88,8 @@ function draw() {
     lastMinute = startMinute;
     Ants = [];
   for (let i = 0; i < numAnts; i++) {
+    // i++ means i = i + 1
+    // increments i by 1 each loop
     Ants.push({
       pos: createVector(random(width), random(height)),
       angle: random(TWO_PI),
@@ -107,6 +109,19 @@ function draw() {
     });
     lastMinute = currentMinute;
     // makes sure we only add one ant per minute
+
+    virtualSecond++;
+    // virtual seconds are the seconds in the sped-up timer
+    if (virtualSecond >= 60) {
+      virtualSecond = 0;
+      virtualMinute++;
+      if (virtualMinute >= 60) {
+        virtualMinute = 0;
+        virtualHour++;
+        if (virtualHour >= 24) {
+          virtualHour = 0;
+        }
+      }
 
   }
 
@@ -134,6 +149,7 @@ function draw() {
       // constrain keeps it within the canvas
   
     }
+  }
 
     
     push();
@@ -170,6 +186,6 @@ function draw() {
   }
 
   // FOR NEXT TIME
-  // need to make it so that when the speed up timer 
-  // is pressed and the hour changes, it 
-  // still goes back to one ant
+  // need to make it so that when the speed up timer ... 
+  // ... is pressed and the hour changes, it...
+  // ... still goes back to one ant per minute
