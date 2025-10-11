@@ -8,9 +8,10 @@ let numAnts;
 let maxAnts = 60; 
 // makes sure the number of ants doesn't exceed 60
 let speedButton;
-let virtualHour, virtualMinute, virtualSecond;
+
 
 function setup() {
+
   createCanvas(windowWidth, windowHeight);
 
   let currentMinute = minute();
@@ -45,34 +46,55 @@ function setup() {
   speedButton = createButton('Speed Up Timer');
   speedButton.position(10, 40);
   speedButton.mousePressed(speedUpTimer);
+
   }
 
+// SPEED UP BUTTON
+// This button, iof pressed, will speed up the timer by one minute
 function speedUpTimer() {
   virtualMinute++;
   if (virtualMinute >= 60) {
     virtualMinute = 0;
     virtualHour++;
+    // ++; means add one
     if (virtualHour >= 24) 
       virtualHour = 0;
-    // reset ants at midnight
-    resetsAntsForNewHour();
-} else {
+  }
     virtualSecond = 0;
-    if (Ants.length < maxAnts){
-      Ants.push({
-        pos: createVector(random(width), random(height)),
-        angle: random(TWO_PI),
-        speed: 2,
-        size: random(5, 15)
-      });
+  
+  if (Ants.length < maxAnts) {
+    Ants.push({
+      pos: createVector(random(width), random(height)),
+      angle: random(TWO_PI),
+      speed: 2,
+      size: random(5, 15)
+    });
+  }
     }
-}
-}
 
-function resetsAntsForNewHour() {
-  numAnts = virtualMinute;
-  if (numAnts < 1) numAnts = 1;
-  Ants = [];
+// ANTS
+// this is the main part and makes the ants move around randomly and adds...
+// ... a new ant every minute (resets each hour)
+function draw() {
+
+  background(255);
+
+  let currentMinute = minute ();
+  // gets the current minute from my computer clock
+    let currentHour = hour();
+  let elapsed = (currentMinute - startMinute + 60) % 60 // loop from 50 tp 0
+  // calculates how many minutes have passed since the start
+  // +60 %60 makes it loop back to 0 after 59
+
+  if (currentHour !== startHour) {
+    // !== means "not equal to"
+    // checks if the hour has changed
+    numAnts = currentMinute;
+    // resets the number of ants to the current minute
+    startHour = currentHour;
+    startMinute = minute();
+    lastMinute = startMinute;
+    Ants = [];
   for (let i = 0; i < numAnts; i++) {
     Ants.push({
       pos: createVector(random(width), random(height)),
@@ -82,51 +104,47 @@ function resetsAntsForNewHour() {
     });
   }
 }
-function draw() {
 
-  background(255);
+  if (currentMinute !== lastMinute && Ants.length < maxAnts && elapsed <60){
+    // checks if a new minute has started and if we haven't reached the max number of ants
+    Ants.push({
+      pos: createVector(random(width), random(height)),
+      angle: random(TWO_PI),
+      speed: 2
+      // adds a new ant with random position and angle
+    });
+    lastMinute = currentMinute;
+    // makes sure we only add one ant per minute
 
-  virtualSecond++;
-  if (virtualSecond >= 60) {
-    virtualSecond = 0;
-    virtualMinute++;
-    if (virtualMinute >= 24) virtualHour = 0;
+  }
 
-    resetsAntsForNewHour();
-  } else {
-    if (Ants.length < maxAnts) {
-      Ants.push({
-        pos: createVector(random(width), random(height)),
-        // https://p5js.org/reference/p5.Vector/fromAngle/
-        angle: random(TWO_PI),
-        speed: 2,
-        size: random(5, 15)
-      });
+   for (let Ant of Ants) {
+    // loop through each ant
+   Ant.angle += random(-0.1,0.1); 
+   // angle randomness
+   let velocity = p5.Vector.fromAngle(Ant.angle);
+   // p5.Vector.fromAngle creates a vector from an angle
+    velocity.mult(Ant.speed);
+    Ant.pos.add(velocity);
+
+    if(Ant.pos.x < 0 || Ant.pos.x > width) {
+      Ant.angle = PI - Ant.angle;
+      // || means "or"
+      // bounce off left and right edges
+      Ant.pos.x = constrain(Ant.pos.x, 0, width);
+      // constrain keeps it within the canvas
     }
-  }
+    if (Ant.pos.y < 0 || Ant.pos.y > height) {
+      Ant.angle = -Ant.angle;
+      // bounce off top and bottom edges
+      Ant.pos.y = constrain(Ant.pos.y, 0, height);
+      // constrain keeps it within the canvas
+  
+    }
 
-for (let Ant of Ants) {
-  // loop through each ant
-  Ant.angle += random(-0.1,0.1);
-  let velocity = p5.Vector.fromAngle(Ant.angle);
-  // p5.Vector.fromAngle creates a vector from an angle
-  velocity.mult(Ant.speed);
-  // mult sets the length of the vector
-  Ant.pos.add(velocity);
-  // adds the velocity to the position to move the ant
-
-  if(Ant.pos.x < 0 || Ant.pos.x > width)
-    Ant.angle = PI - Ant.angle;
-  // || means "or"
-  // bounce off left and right edges
-  Ant.pos.x = constrain(Ant.pos.x, 0, width);
-  // constrain keeps it within the canvas
-}
-  if (Ant.pos.y < 0 || Ant.pos.y > height) {
-    Ant.angle = -Ant.angle;
-    Ant.pos.y = constrain(Ant.pos.y, 0, height);
-  }
     
+// DRAWS THE ACTUAL ANT(S)
+// This part makes the ants' body parts 
     push();
     translate(Ant.pos.x,Ant.pos.y);
     rotate(Ant.angle);
@@ -140,25 +158,35 @@ for (let Ant of Ants) {
     // head
     rect(20,2,8,0.3);
     rect(20,-3,8,0.3);
-    // (x,y, width, height)
-    // change antenas to lines to create angles
+    // antenas
+    // I need to change antenas to lines to create angles
 
     pop();
     } 
 
-  // TIME DISPLAY
+// TIMER
+// This part makes the timer and shows hour, minute, second
+// It should be be constantly updating, but having a hard time with that right now
+// I also can't figure out how to make it show up at the same time as the ants...
+// ... (I've moved it to different parts of the code but it still doesn't work)
+// I also want to make it so that when the speed up button is pressed...
+// ... the timer speeds up until the button is pressed again but haven't figured that out yet
+  function draw(){
   let h = hour();
   let m = minute();
   let s = second();
-  let timeString = nf(virtualHour, 2) + ':' + nf(virtualMinute, 2) + ':' + nf(virtualSecond, 2);
-  // formats the time to always show two digits
-  // time string is used to show the time on the canvas
+  let timeString = (virtualHour) + ':' + (virtualMinute) + ':' + (virtualSecond);
+  // string lets me do multiple types of things in one line (variables)
   textSize(32);
   fill(0);
   text(timeString, 10, 30);
-  // timestring means "hour:minute:second"
+  }
+  }
 
-  console.log();
+
+
+
+
 
 
 

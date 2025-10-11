@@ -3,7 +3,7 @@ let drunks = []; // square brackets = array
 let drunkAmount = 100;
 
 
-
+ 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(100,120,130);
@@ -15,7 +15,7 @@ function setup() {
   for (let i=0; i < drunkAmount; i++){ // for loop
     let drunkD = random(10,100); // diameters from 10 to 100
     let drunkSpeed = random(1,10); // speed from 1 to 10
-    let drunkHue = random(80,200); // hues from 80 to 200
+    let drunkHue = random(0,80); // hues from 0 to 80
     // create a new Drunk object and put it in the array
     drunks[i] = new Drunk(width/2, height/2, drunkD, drunkSpeed, drunkHue);
   }
