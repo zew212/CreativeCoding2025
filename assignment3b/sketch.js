@@ -1,6 +1,7 @@
 let secondBugs = [];
 let minuteBugs = [];
 let hourBugs = [];
+let numBugs;
 
 
 function setup() {
@@ -29,10 +30,9 @@ function setup() {
 
 function draw() {
   background(255);
+// TIMER
   textSize(20);
   text( hour() + " : " + minute() + " : " + second(), 15, 30);
-  // how to make text bigger?
-
   
   for(let i = 0; i<second();i++){
     secondBugs[i].move();
@@ -51,7 +51,7 @@ function draw() {
 }
 
 
-// Bug class
+// BUG CLASS
 class Bug {
   constructor(x,y, type){
     this.x = x;
@@ -71,10 +71,13 @@ class Bug {
     this.y += random (-this.speed, this.speed);
   }
 
+// BUGS
   display(){
     push();
     translate (this.x, this.y);
     fill(20);
+
+// BUG 1
     if (this.type=="bug1"){
       ellipse(0,0,12,12);
       // butt
@@ -87,6 +90,7 @@ class Bug {
       rect(20,-3,8,0.3);
     // antenas
 
+// BUG 2
     } else if (this.type=="bug2"){
       ellipse(20,20,20,9);
 	    circle(10,20,10);
@@ -98,7 +102,7 @@ class Bug {
 	    rect(14,12,1,8);
 
     }
-
+// BUG 3
     else if (this.type=="bug3"){
       ellipse(20,20,20,15);
 	    rect(24,20,1,11);

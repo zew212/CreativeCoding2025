@@ -118,7 +118,7 @@ function draw() {
 
   }
 
-   for (let Ant of Ants) {
+   for (let Ant of Ants) { 
     // loop through each ant
    Ant.angle += random(-0.1,0.1); 
    // angle randomness
