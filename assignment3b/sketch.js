@@ -2,6 +2,7 @@ let secondBugs = [];
 let minuteBugs = [];
 let hourBugs = [];
 
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
   x = width/2;
@@ -56,7 +57,7 @@ class Bug {
     this.x = x;
     this.y = y;
     this.speed = 2;
-    this.type = random (["bug1" , "bug2"]);
+    this.type = random (["bug1" , "bug2", "bug3"]);
   }
 
   // makes the bug move randomly
