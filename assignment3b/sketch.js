@@ -12,6 +12,8 @@ function setup() {
   x = width/2;
   y = height/2;
 
+// INITIAL BUGS
+// makes the number of bugs equal to the current time
   for (let i = 0; i<second(); i++){
     let x = random (width);
     let y = random (height);
@@ -34,10 +36,14 @@ function setup() {
 function draw() {
   background(255);
 // TIMER
+// shows the current time
   textSize(20);
   text( hour() + " : " + minute() + " : " + second(), 15, 30);
 
+// NEW BUGS
+// adds a new bug every second, minute and hour based on the type of bug
   if  (second() != lastSecond) {
+    // != means "is not equal to"
     secondBugs.push (new Bug(random(width), random(height), "bug1"));
     lastSecond = second();
   }
@@ -51,6 +57,9 @@ function draw() {
     hourBugs.push (new Bug(random(width), random(height), "bug3"));
     lastHour = hour();
   }
+
+// DISPLAY BUGS
+// makes all bugs move and display
   for(let bug of secondBugs) {
     bug.move();
     bug.display();
@@ -69,7 +78,7 @@ function draw() {
 
 
 // BUG CLASS
-// This class creates a bug with a random type, position and speed
+// Creates a bug with a random type, position and speed
 class Bug {
   constructor(x,y, type){
     this.x = x;
