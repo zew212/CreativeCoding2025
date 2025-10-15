@@ -1,6 +1,6 @@
 Description
 
-My idea for this project was to create a clock that adds bugs to it as time passes. There are three different bugs– one for second, one for minute and one for hour. And I also have a timer in the corner so you can see the time pass as you watch the bugs multiply.
+My idea for this project was to create a clock that adds bugs to it as time passes. There are three different bugs– one for second, one for minute and one for hour. And I also have a timer in the corner so you can see the time pass as you watch the bugs multiply and when you press the mouse, the speed of the bugs increases (they get jittery).
 
 I initially wanted the ants (at the time I was only using one bug) to drop bits of dirt to slowly fill the window up over time but then realize my skills are not there yet. I watched a lot of similar projects on p5.js (linked below) and got some good inspiration for how I wanted the ants to look from that, however most of the projects I looked at had similar elements to what I wanted to do, but I found that using patchwork techniques for my code did not work. The professor then gave be some exaples of code to incorperate uses what we've learned in class and so I changed that and the only difference visually is that the ants don't move, they shake because I used the drunk walk for them.
 

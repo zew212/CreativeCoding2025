@@ -89,6 +89,8 @@ class Bug {
 
   // makes the bug move randomly
   move(){
+
+    // makes the bugs move faster when the mouse is pressed
     if (mouseIsPressed){
       this.speed = 5;
     } else {
@@ -108,7 +110,6 @@ class Bug {
     if (this.type=="bug1"){
       ellipse(0,0,12,12);
       // butt
-      // elipse(x,y,width,height)
      ellipse(8,0,8,8);
       // body
       ellipse(16,0,9,9);
