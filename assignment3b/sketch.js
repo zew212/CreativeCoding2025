@@ -2,6 +2,9 @@ let secondBugs = [];
 let minuteBugs = [];
 let hourBugs = [];
 let numBugs;
+let lastSecond = -1;
+let lastMinute = -1;
+let lastHour = -1;
 
 
 function setup() {
@@ -9,19 +12,19 @@ function setup() {
   x = width/2;
   y = height/2;
 
-  for (let i = 0; i<60; i++){
+  for (let i = 0; i<second(); i++){
     let x = random (width);
     let y = random (height);
     secondBugs [i] = new Bug (x,y, "bug1");
   }
 
-  for (let i = 0; i<60; i++){
+  for (let i = 0; i<minute(); i++){
     let x = random (width);
     let y = random (height);
     minuteBugs [i] = new Bug (x,y, "bug2");
   }
 
-  for (let i = 0; i<24; i++){
+  for (let i = 0; i<hour(); i++){
     let x = random (width);
     let y = random (height);
     hourBugs [i] = new Bug (x,y, "bug3");
@@ -33,31 +36,46 @@ function draw() {
 // TIMER
   textSize(20);
   text( hour() + " : " + minute() + " : " + second(), 15, 30);
-  
-  for(let i = 0; i<second();i++){
-    secondBugs[i].move();
-    secondBugs[i].display();
+
+  if  (second() != lastSecond) {
+    secondBugs.push (new Bug(random(width), random(height), "bug1"));
+    lastSecond = second();
   }
 
-  for (let i = 0; i<minute(); i++){
-    minuteBugs[i].move();
-    minuteBugs[i].display();
+  if (minute() !== lastMinute) {
+    minuteBugs.push (new Bug(random(width), random(height), "bug2"));
+    lastMinute = minute();
   }
 
-  for (let i = 0; i<hour(); i++){
-    hourBugs[i].move();
-    hourBugs[i].display();
+  if (hour() !== lastHour) {
+    hourBugs.push (new Bug(random(width), random(height), "bug3"));
+    lastHour = hour();
+  }
+  for(let bug of secondBugs) {
+    bug.move();
+    bug.display();
+  }
+
+  for (let bug of minuteBugs) {
+    bug.move();
+    bug.display();
+  }
+
+  for (let bug of hourBugs) {
+    bug.move();
+    bug.display();
   }
 }
 
 
 // BUG CLASS
+// This class creates a bug with a random type, position and speed
 class Bug {
   constructor(x,y, type){
     this.x = x;
     this.y = y;
     this.speed = 2;
-    this.type = random (["bug1" , "bug2", "bug3"]);
+    this.type = type;
   }
 
   // makes the bug move randomly
@@ -114,7 +132,7 @@ class Bug {
 
 	fill(255);
 	circle(18,20,8);
-    pop();
   }
+  pop();
 }
 }
