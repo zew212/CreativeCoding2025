@@ -8,12 +8,13 @@ let instructionsShown;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  colorMode(HSB);
 
-  myCake = new Cake(mouseX-145, mouseY-127.5, true,true,true);
+  myCake = new Cake (mouseX-145, mouseY-127.5, false,false,false,false);
 }
 
 // FROSTING
-// whenever the mouse is clicked, the frosting switches on/off
+// whenever the mouse is clicked, a new cake is made at the position of the mouse
 function mousePressed() {
   let newCake = new Cake(myCake.x, myCake.y, myCake.showCandles, myCake.showFrosting, myCake.showFlames);
   cakes.push(newCake);
@@ -29,12 +30,8 @@ function keyPressed() { // add functionality that changes flame / frosting on ke
   else if (key === 'l' || key === 'L') {
     myCake.showFlames = !myCake.showFlames;
   }
-  else if (key === 'b' || key === 'B') {
-    this.showFrosting == fill('blue');
 
 }
-}
-
 
 function draw() {
   background(0);
@@ -44,11 +41,11 @@ function draw() {
   myCake.display(showFrosting, showFlames, showCandles);
 
   for(let i = 0; i < cakes.length; i++){
+
     cakes[i].display();
   }
 
   textInstructions();
-
 
 }
 
@@ -61,8 +58,6 @@ function textInstructions() {
   text("Click 'F' to frost the cake", 10, 20);
   text("Press 'C' to add candles", 10, 40);
   text("Press 'L' to light the flames", 10, 60);
-  text("Press 'B' to change frosting to blue", 10, 80);
-  text("Press 'P' to change frosting back to pink", 10, 100);
 }
   
   class Cake{
@@ -72,7 +67,6 @@ function textInstructions() {
       this.showCandles = showCandles;
       this.showFrosting = showFrosting;
       this.showFlames = showFlames;
-      this.FrostingFill = random();
     } 
 
     display(){
@@ -81,7 +75,7 @@ function textInstructions() {
       
 // CAKE
       noStroke();
-      fill ('pink');
+      fill ('lightpink');
       rect(0,0,90,60);
       fill (255);
 // CANDLES
@@ -104,19 +98,12 @@ function textInstructions() {
       if (this.showFrosting) {
 // BOTTOM FROSTING
       noStroke();
-      fill('rgb(236,175,236)');
+      fill('purple');
       for (let j = 0; j <= 9; j++) {
-        circle(j * 10, 27.5, 10);
-        // changes frosting to blue when 'b' is pressed
-       if (key === 'b' || key === 'B') {
-        this.showFrosting == fill('blue');
+        circle(j * 10, 56, 10);
+ 
       }
-        // changes frosting back to pink when 'p' is pressed
-      else if (key === 'p' || key === 'P') {
-        this.showFrosting == fill('rgb(236,175,236)');
-      }
-      
-      }
+ 
 // TOP FROSTING
       for (let k = 0; k <= 9; k++) {
         circle(k * 10, 2, 10);
@@ -126,8 +113,8 @@ function textInstructions() {
      if (this.showFlames) {
         fill('orange');
         for (let i = 0; i < 7; i++) {
-          let cx = 10 + i * 10;
-          circle(cx + 2, -15, 8);
+          let FlameX = 10 + i * 10;
+          circle(FlameX + 2, -15, 8 + random(2));
           // circle(x position of candle + half candle width, y position of top of candle, diameter of flame)
         }
       }
