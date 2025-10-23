@@ -36,6 +36,7 @@ function keyPressed() { // add functionality that changes flame / frosting on ke
 function draw() {
   background(0);
   // centers the cake at the mouse
+  // I made the cake originally on open processing so the offset is a bit weird
   myCake.x = mouseX-40;
   myCake.y = mouseY-25;
   myCake.display(showFrosting, showFlames, showCandles);
@@ -45,8 +46,8 @@ function draw() {
     cakes[i].display();
   }
 
+// puts the instructions on screen
   textInstructions();
-
 }
 
 // INSTRUCTIONS
@@ -60,8 +61,11 @@ function textInstructions() {
   text("Press 'L' to light the flames", 10, 60);
 }
   
+
+// creates the cake class
   class Cake{
     constructor(x,y, showCandles, showFrosting, showFlames){
+      // sets up the variables
       this.x = x;
       this.y = y;
       this.showCandles = showCandles;
@@ -85,23 +89,22 @@ function textInstructions() {
 
       
       for (let i = 0; i < 7; i++){
-        let cx = 10 + i * 10;
-      // cx is candle x position
+        let candleX = 10 + i * 10;
       // this loop draws all 7 candles, evenly spaced
         stroke(1);
         fill(255);
-        rect(cx, 0, 4, -15);
+        rect(candleX, 0, 4, -15);
       }
     }
 
 
-      if (this.showFrosting) {
 // BOTTOM FROSTING
+      if (this.showFrosting) {
       noStroke();
       fill('purple');
       for (let j = 0; j <= 9; j++) {
         circle(j * 10, 56, 10);
- 
+        // this loop draws the bottom frosting
       }
  
 // TOP FROSTING
@@ -116,6 +119,7 @@ function textInstructions() {
           let FlameX = 10 + i * 10;
           circle(FlameX + 2, -15, 8 + random(2));
           // circle(x position of candle + half candle width, y position of top of candle, diameter of flame)
+          // adding the random function makes the flames flicker
         }
       }
 
