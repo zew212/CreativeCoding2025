@@ -1,9 +1,11 @@
+
 let circleX, circleY;
 let circleDiameter = 10;
 let thetaX = 0;
 let thetaY = 0;
 let radiusX = 90;
 let radiusY = 20;
+// the above variables are made around the size of the cauldron
 
 let speedX = 3;
 let speedY = 3;
@@ -14,7 +16,11 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(0);
+  fill(255);
+  rect(50,50,300,300);
+  // made a window thing so the black background goes...
+  //... with the other sketches but this one is still visible because of the white box
 
 // CAULDRON
   stroke(0);
@@ -27,7 +33,7 @@ function draw() {
 
 // BUBBLE
   fill(100);
-	circleX = width/2 + cos(radians(thetaX))*radiusX; // set an x value in relation to the cos() value of theta at a polar position of width/2, amplified by a radius variable
+	circleX = width/2 + cos(radians(thetaX))*radiusX; 
 	circleY = 250 + sin(radians(thetaY))*radiusY;
 
   noStroke();
@@ -38,6 +44,7 @@ function draw() {
 
   // STIRRING STICK
   fill('rgba(78, 27, 27, 1)');
+  // x position chnages but Y stays the same
   rect(circleX,150,5,100);
 
 }
