@@ -48,7 +48,7 @@ function draw() {
   vertex(150,100);
   vertex(190,120);
   endShape();
-  fill (0);
+  fill ('rgba(153, 112, 22, 0.33)');
   drunkX = drunkX + random(-drunkRange, drunkRange);
   drunkY = drunkY + random(-drunkRange, drunkRange);
   let coordinate = createVector(drunkX, drunkY);
