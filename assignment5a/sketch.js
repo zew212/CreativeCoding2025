@@ -8,7 +8,7 @@ function setup() {
 }
  
 function draw() {
-  background (0);
+  background ('orange');
   translate (width / 4, height / 4); // I used the code from the 
   // class lesson and now my function is built around this translate
 
