@@ -3,12 +3,20 @@ let drunkY= 200;
 let drunkRange= 5;
 let drunkDiameter= 5;
 
+let coordinates = [];
+
 function setup() {
   createCanvas(400, 400);
   background (0);
   
 
-// PUMPKIN
+
+
+}
+
+function draw() {
+  background("yellow");
+  // PUMPKIN
   fill ('orange');
   ellipse(200,200,250,200);
 // RINGS
@@ -40,13 +48,25 @@ function setup() {
   vertex(150,100);
   vertex(190,120);
   endShape();
-
-}
-
-function draw() {
-
   fill (0);
   drunkX = drunkX + random(-drunkRange, drunkRange);
   drunkY = drunkY + random(-drunkRange, drunkRange);
+  let coordinate = createVector(drunkX, drunkY);
+  coordinates.push(coordinate);
+  for (let i = 0; i < coordinates.length; i++) {
+    let pos = coordinates[i];
+    circle(pos.x, pos.y, drunkDiameter);
+  }
+
+  if(dist(drunkX, drunkY, 200,200) > 100){
+    console.log("out of bounds");
+    drunkX = 200;
+    drunkY = 200;
+    coordinates = [];
+  }
+
+
   circle(drunkX, drunkY, drunkDiameter);
+
+
 }

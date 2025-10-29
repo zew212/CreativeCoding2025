@@ -16,9 +16,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
-  fill(255);
-  rect(50,50,300,300);
+  background(255);
   // made a window thing so the black background goes...
   //... with the other sketches but this one is still visible because of the white box
 
