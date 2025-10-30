@@ -8,7 +8,7 @@ function setup() {
 }
  
 function draw() {
-  background ('orange');
+  background ('rgba(235, 151, 6, 0.5)'); // changed background from black so more visible on projection
   translate (width / 4, height / 4); // I used the code from the 
   // class lesson and now my function is built around this translate
 
@@ -45,11 +45,6 @@ function draw() {
     ellipse(-60,150,diam*0.5, diam*0.2);
   fill ('#d80505ff');
     circle(-60,150,diam*0.08);
-
-
-
-
-
 
 
   noisePosition = noisePosition + speed;

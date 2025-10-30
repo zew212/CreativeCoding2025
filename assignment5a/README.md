@@ -1,1 +1,1 @@
-I think for this one I want to try to make it similar to a lava lamp (as much as I can), so using the (randomness?) to create different circles that grow and shrink using perlin noise and move around the page.
+For this one I made eyes that randomly grow smaller and bigger through perlin noise. I went with a Halloween theme throughout my sketches so I wanted it to have a creepy vibe.
