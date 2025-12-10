@@ -3,6 +3,11 @@ let bodyPose;
 let connections;
 let poses = [];
 
+let labels = [];
+
+let posesChanged = false;
+let previousPoseCount = 0;
+
 
 function preload(){
   // loads the bodyPose model
@@ -22,7 +27,7 @@ function setup(){
 }
 
 function draw(){
-  background(255);
+  background(0);
 
   let scaleFactor = windowWidth/640;
   scale(scaleFactor);
@@ -35,20 +40,23 @@ function draw(){
   let choice = random(words);
 
 
+  if(poses.length != previousPoseCount){
+    for(let i = 0; i<poses.length;i++){
+      labels[i] = random(words);
+    }
+    previousPoseCount = poses.length;
+  }
+  //if(poses.length> 0){
+  for(let i = 0; i<poses.length;i++){
+    fill(255);
 
-  if(poses.length> 0
 
-  ){
-    fill(0);
-
-
-    text(choice, poses[0].keypoints[0].x,poses[0].keypoints[0].y)
+    text(labels[i], poses[i].keypoints[0].x,poses[i].keypoints[0].y)
     // follows head
     }
-
   }
 
-
+  //}
 
 
 function gotPoses(results){

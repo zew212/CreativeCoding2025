@@ -1,6 +1,3 @@
-// IN CLASS
-// two people 
-
 let video;
 let bodyPose; 
 let connections;
@@ -31,6 +28,9 @@ function setup(){
 function draw(){
   background(0);
 
+  fill (255);
+  text("put hands together to make circle appear", 20, 20);
+
   let scaleFactor = windowWidth/640;
   scale(scaleFactor);
 
@@ -53,39 +53,23 @@ function draw(){
   ){
     fill(255);
 
-    let handDistance = dist(poses[0].keypoints[9].x,poses[0].keypoints[9].y,poses[0].keypoints[10].x,poses[0].keypoints[10].y);
+      let handDistance = dist(poses[0].keypoints[9].x,poses[0].keypoints[9].y,poses[0].keypoints[10].x,poses[0].keypoints[10].y);
       if(handDistance < 100){
-        // when hands are together, you 'appear'
-        fill(255);
+
+        fill('red');
         
       }
       else{
         fill(0);
       }
 
-    // BODY
-    beginShape();
-    vertex(poses[0].keypoints[5].x,poses[0].keypoints[5].y);
-    vertex(poses[0].keypoints[6].x,poses[0].keypoints[6].y);
-    vertex(poses[0].keypoints[12].x,poses[0].keypoints[12].y);
-    vertex(poses[0].keypoints[11].x,poses[0].keypoints[11].y);
-    endShape();
 
     // HEAD
-    beginShape();
+
     circle (poses[0].keypoints[1].x,poses[0].keypoints[1].y, 120);
 
-    endShape();
 
-    // // LEFT ARM
-    // strokeWeight(40);
-    // line(poses[0].keypoints[5].x,poses[0].keypoints[5].y, poses[0].keypoints[9].x,poses[0].keypoints[9].y);
 
-    // HANDS
-    // left
-    circle(poses[0].keypoints[9].x,poses[0].keypoints[9].y, 80);
-    // right
-    circle(poses[0].keypoints[10].x,poses[0].keypoints[10].y, 80);
 
 
   }
