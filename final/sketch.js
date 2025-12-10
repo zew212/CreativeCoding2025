@@ -29,27 +29,37 @@ function setup(){
 
 function draw(){
   background(0);
-
+  //image(video,0,0,width,height);
   
 
   let scaleFactor = windowWidth/640;
+  // 640 pixels on screen
   scale(scaleFactor);
 
   for (let i = 0; i < poses.length; i++){
     let person = poses[i];
-    let nose = person.keypoints[0];
+    let head = person.keypoints[0];
     let leftWrist = person.keypoints[9];
     let rightWrist = person.keypoints[10];
-    if (nose.confidence > 0.1 && 
+    if (head.confidence > 0.1 && 
       leftWrist.confidence > 0.1 && 
       rightWrist.confidence > 0.1){
+
+    // ADD LERP
    
     // RIGHT HAND
-      let micOnRight = dist(nose.x, nose.y, rightWrist.x, rightWrist.y);
+      let micOnRight = dist(head.x, head.y, rightWrist.x, rightWrist.y);
     // LEFT HAND
-      let micOnLeft = dist(nose.x, nose.y, leftWrist.x, leftWrist.y);
+      let micOnLeft = dist(head.x, head.y, leftWrist.x, leftWrist.y);
 
-      let usingMic = (micOnRight < 200) || (micOnLeft < 200);
+      let distanceConstant = dist(person.keypoints[12].x, person.keypoints[12].y,person.keypoints[5].x,person.keypoints[5].y);
+      let normalizedRight = micOnRight/distanceConstant;
+      let normalizedLeft = micOnLeft/distanceConstant;
+
+      // text(normalizedLeft,leftWrist.x,leftWrist.y - 20);
+      // text(normalizedRight,rightWrist.x,rightWrist.y - 20);
+
+      let usingMic = (normalizedLeft < 0.7) || (normalizedRight < 0.7);
       // distance will depend on how far the person is from the camera
       // this makes it so that both hands can trigger the spotlight
       if (usingMic){
@@ -59,12 +69,14 @@ function draw(){
       }
 
     // HEAD
-        circle(nose.x, nose.y, 180);
+        circle(head.x, head.y, 200);
     }
   }
 
 
+
+}
+
 function gotPoses(results){
   poses = results;
-}
 }
