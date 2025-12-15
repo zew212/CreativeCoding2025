@@ -2,8 +2,21 @@ let video;
 let bodyPose; 
 let connections;
 let poses = [];
+
+
+let headPX = 0;
+let headPY = 0;
+
+let headTargetX = 0;
+let headTargetY = 0;
+
+let headCurrentX = 0;
+let headCurrentY = 0;
+
 let lerpAmount = 1;
-let speed = 0.05;
+let speed = 5;
+// I tested it and 5 seemed to do the job of following normal motion
+
 
 
 function preload(){
@@ -33,28 +46,32 @@ function draw(){
   // windowWidth/640 scales the 640 pixel wide video to the full width of the window
   scale(scaleFactor);
 
-  for (let i = 0; i < poses.length; i++){
-    let person = poses[i];
+  if (poses.length > 0){
+    let person = poses[0];
     let head = person.keypoints[0];
     let leftWrist = person.keypoints[9];
     let rightWrist = person.keypoints[10];
+
     if (head.confidence > 0.1 && 
       leftWrist.confidence > 0.1 && 
       rightWrist.confidence > 0.1){
 
-    // ADD LERP
-   
-    // RIGHT HAND
+    
+      headCurrentX = lerp(headPX, headTargetX, lerpAmount);
+      headCurrentY = lerp(headPY, headTargetY, lerpAmount);
+
+      lerpAmount += speed;
+      lerpAmount = constrain(lerpAmount, 0, 1);
+
       let micOnRight = dist(head.x, head.y, rightWrist.x, rightWrist.y);
-    // LEFT HAND
       let micOnLeft = dist(head.x, head.y, leftWrist.x, leftWrist.y);
 
-      let distanceConstant = dist(person.keypoints[12].x, person.keypoints[12].y,person.keypoints[5].x,person.keypoints[5].y);
+      let distanceConstant = dist(person.keypoints[12].x, person.keypoints[12].y,
+        person.keypoints[5].x,person.keypoints[5].y);
+      // normalizing the distance of the mic to the head
+      // makes it so that the distance is relative to how far the person is from the camera (works from all ranges)
       let normalizedRight = micOnRight/distanceConstant;
       let normalizedLeft = micOnLeft/distanceConstant;
-
-      // text(normalizedLeft,leftWrist.x,leftWrist.y - 20);
-      // text(normalizedRight,rightWrist.x,rightWrist.y - 20);
 
       let usingMic = (normalizedLeft < 0.7) || (normalizedRight < 0.7);
       // distance will depend on how far the person is from the camera
@@ -66,7 +83,7 @@ function draw(){
       }
 
     // HEAD
-        circle(head.x, head.y, 200);
+        circle(headCurrentX, headCurrentY, 200);
     }
   }
 
@@ -76,4 +93,16 @@ function draw(){
 
 function gotPoses(results){
   poses = results;
+
+  if (poses.length > 0){
+    let head = poses[0].keypoints[0];
+
+    headPX = headCurrentX;
+    headPY = headCurrentY;
+
+    headTargetX = head.x;
+    headTargetY = head.y;
+    
+    lerpAmount = 0;
+  }
 }
